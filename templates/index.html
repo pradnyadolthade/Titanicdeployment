@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:>
+<head>
+    <meta charset="UTF-8">
+
+
+<title>Titanic Survival</title>
+<style>
+
+form {
+color:white;
+text-align:center
+}
+
+input{
+border-radius:10px;
+padding:3px;
+width: 50%
+}
+
+input[type=submit] {
+  background-color: green;
+  color: white;
+  width: 10%
+}
+input:required:invalid, input:focus:invalid {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAeVJREFUeNqkU01oE1EQ/mazSTdRmqSxLVSJVKU9RYoHD8WfHr16kh5EFA8eSy6hXrwUPBSKZ6E9V1CU4tGf0DZWDEQrGkhprRDbCvlpavan3ezu+LLSUnADLZnHwHvzmJlvvpkhZkY7IqFNaTuAfPhhP/8Uo87SGSaDsP27hgYM/lUpy6lHdqsAtM+BPfvqKp3ufYKwcgmWCug6oKmrrG3PoaqngWjdd/922hOBs5C/jJA6x7AiUt8VYVUAVQXXShfIqCYRMZO8/N1N+B8H1sOUwivpSUSVCJ2MAjtVwBAIdv+AQkHQqbOgc+fBvorjyQENDcch16/BtkQdAlC4E6jrYHGgGU18Io3gmhzJuwub6/fQJYNi/YBpCifhbDaAPXFvCBVxXbvfbNGFeN8DkjogWAd8DljV3KRutcEAeHMN/HXZ4p9bhncJHCyhNx52R0Kv/XNuQvYBnM+CP7xddXL5KaJw0TMAF8qjnMvegeK/SLHubhpKDKIrJDlvXoMX3y9xcSMZyBQ+tpyk5hzsa2Ns7LGdfWdbL6fZvHn92d7dgROH/730YBLtiZmEdGPkFnhX4kxmjVe2xgPfCtrRd6GHRtEh9zsL8xVe+pwSzj+OtwvletZZ/wLeKD71L+ZeHHWZ/gowABkp7AwwnEjFAAAAAElFTkSuQmCC);
+    background-position: right top;
+    background-repeat: no-repeat;
+    -moz-box-shadow: none;
+  }
+  input:required:valid {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAepJREFUeNrEk79PFEEUx9/uDDd7v/AAQQnEQokmJCRGwc7/QeM/YGVxsZJQYI/EhCChICYmUJigNBSGzobQaI5SaYRw6imne0d2D/bYmZ3dGd+YQKEHYiyc5GUyb3Y+77vfeWNpreFfhvXfAWAAJtbKi7dff1rWK9vPHx3mThP2Iaipk5EzTg8Qmru38H7izmkFHAF4WH1R52654PR0Oamzj2dKxYt/Bbg1OPZuY3d9aU82VGem/5LtnJscLxWzfzRxaWNqWJP0XUadIbSzu5DuvUJpzq7sfYBKsP1GJeLB+PWpt8cCXm4+2+zLXx4guKiLXWA2Nc5ChOuacMEPv20FkT+dIawyenVi5VcAbcigWzXLeNiDRCdwId0LFm5IUMBIBgrp8wOEsFlfeCGm23/zoBZWn9a4C314A1nCoM1OAVccuGyCkPs/P+pIdVIOkG9pIh6YlyqCrwhRKD3GygK9PUBImIQQxRi4b2O+JcCLg8+e8NZiLVEygwCrWpYF0jQJziYU/ho2TUuCPTn8hHcQNuZy1/94sAMOzQHDeqaij7Cd8Dt8CatGhX3iWxgtFW/m29pnUjR7TSQcRCIAVW1FSr6KAVYdi+5Pj8yunviYHq7f72po3Y9dbi7CxzDO1+duzCXH9cEPAQYAhJELY/AqBtwAAAAASUVORK5CYII=);
+    background-position: right top;
+    background-repeat: no-repeat;
+  }
+body{
+background-image:url('/static/titani1.jpg');
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;
+}
+select {
+padding:3px;
+border-radius:10px;
+width: 50%;
+}
+label {
+  font-size: 20px;
+  display: inline-block;
+  width: 150px;
+  text-align: right;
+}​
+
+</style>
+</head>
+
+<body>
+<center>
+<img src="/static/ship.png" alt="ship", width="200" height="200"></center>
+<center><h1>Titanic Survival Prediction: {{ results}}</h1></center>
+
+<form action="{{ url_for('predict')}}" method="post">
+
+
+<label for = "fnam">Name</label>
+<input type = 'text' id = 'fnam', name = 'fn', required = 'required', pattern= "[a-zA-Z]+[a-zA-Z ]+" placeholder = "Enter Passenger's Name..." />
+
+<br><br>
+
+<label for = "pclass">Passenger Class</label>
+<select id="pclass" name="pclass">
+      <option value="1">First</option>
+      <option value="2">Second</option>
+      <option value="3">Third</option>
+</select>
+
+<br><br>
+
+<label for = "sex">Gender</label>
+<select id="sex" name="sex">
+      <option value="1">Male</option>
+      <option value="0">Female</option>
+</select>
+
+<br><br>
+
+<label for = "age">Age</label>
+<input type = 'number' id = 'age', name = 'age', min="0" max="99" required = 'required', placeholder = 'Enter Age...' />
+
+<br><br>
+
+<label for = "spouse">Spouse On Board</label>
+<select id="spouse" name="spouse">
+      <option value="1">Yes</option>
+      <option value="0">No</option>
+</select>
+
+
+<br><br>
+
+<label for = "sib">Number of Siblings on board</label>
+<input type = 'number' id = 'sib', name = 'sib', required = 'required', min="0" max="5" placeholder = 'Enter a number...' />
+
+
+<br></br>
+
+<label for = "par">Number of parents on board</label>
+<input type = 'number' id = 'par', name = 'par', required = 'required', min="0" max="4" placeholder = 'Enter a number...' />
+
+<br></br>
+
+<label for = "child">Number of children on board</label>
+<input type = 'number' id = 'child', name = 'child', required = 'required', min="0" max="10" placeholder = 'Enter a number...' />
+
+
+<br><br>
+
+<label for = "fare">Fare</label>
+<input type = 'number' id = 'fare', name = 'fare', required = 'required', min="1" step="any" placeholder = 'Enter Fare Amount...' />
+
+
+<br><br>
+<label for = "embarked">Embarked</label>
+<select id="embarked" name="embarked">
+      <option value="0">Southampton</option>
+      <option value="1">Cherbourg</option>
+      <option value="2">Queenstown</option>
+</select>
+
+
+<br><br>
+
+<label></label>
+<input id="submit" type="submit" value="Predict" ></input>
+
+</form>
+
+</body>
+
+</html>
